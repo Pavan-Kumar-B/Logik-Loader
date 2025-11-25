@@ -1,0 +1,53 @@
+{
+    "manifest_version": 3,
+    "name": "Logik Loader",
+    "version": "3.0",
+    "description": "Your Bridge Between Logik.io Environments",
+    "permissions": [
+        "scripting",
+        "activeTab",
+        "storage"
+    ],
+    "host_permissions": [
+        "https://*.logik.io/*"
+    ],
+    "background": {
+        "service_worker": "src/js/background/service-worker.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://*.logik.io/ui/configure/testFrame.html"
+            ],
+            "js": [
+                "src/js/config/config.js",
+                "src/js/utils/logger.js",
+                "src/js/utils/common.js",
+                "src/js/content/state-manager.js",
+                "src/js/content/ui-manager.js",
+                "src/js/content/controller.js",
+                "src/js/content/entry.js"
+            ],
+            "css": [
+                "src/css/styles.css"
+            ],
+            "run_at": "document_start"
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "src/js/handler/handler.js",
+                "src/assets/logo.png" 
+            ],
+            "matches": [
+                "https://*.logik.io/*"
+            ]
+        }
+    ],
+    "icons": {
+        "16": "src/assets/logo.png",
+        "48": "src/assets/logo.png",
+        "128": "src/assets/logo.png"
+    }
+}
